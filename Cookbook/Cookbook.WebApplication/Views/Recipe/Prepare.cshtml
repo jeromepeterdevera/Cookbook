@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Prepare";
+}
+
+
+<div class="container" id="cookbook-container">
+    <div id="top-left-panel" class="col-sm-8">
+        <div id="top-left-panel-header"></div>
+        <div id="top-left-panel-body"></div>
+    </div>
+    <div id="top-right-panel" class="col-sm-4">
+        <div id="top-right-panel-header"></div>
+        <div id="top-right-panel-body"></div>
+    </div>
+    <div id="bottom-panel" class="col-sm-12">
+        <div id="bottom-actions"></div>
+    </div>
+</div>
+
+<script id="top-left-panel-body-template" type="text/x-handlebars-template">
+    <form>
+        <div class="form-group">
+            <label for="recipe-name">Name your masterpiece!</label>
+            <input class="form-control" type="text" id="recipe-name">
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ingredients</h5>
+                <div id="ingredients-list">
+                    <span id="ingredient-reminder">Select from the recipe ingredients.</span>
+                    <div class="list-group" id="selected-ingredient-list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <button type="button" class="btn btn-light" id="backRecipe">Cancel</button>
+        <button type="button" class="btn btn-primary" id="setToDonePrepareRecipe">Done</button>
+    </form>
+</script>
+
+<script id="ingredients-list-panel-template" type="text/x-handlebars-template">
+    <h5 class="card-title">Recipe Ingredients</h5>
+    <div class="list-group" id="ingredients-list-panel">
+    </div>
+</script>
+
+<script id="ingredients-item-template" type="text/x-handlebars-template">
+    <button type="button" class="list-group-item list-group-item-action" data-ingredient-id="{{ingredientId}}" id="ingredient-{{ingredientId}}">{{name}}</button>
+</script>
+
+<script src="~/js/prepare.js" asp-append-version="true"></script>
+
+
+

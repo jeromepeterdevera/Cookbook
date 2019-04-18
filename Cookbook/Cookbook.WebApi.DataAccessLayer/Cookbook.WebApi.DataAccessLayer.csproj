@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190415104254_InitialCookbookDatabaseAndTables.cs" />
+    <Compile Remove="Migrations\20190415104254_InitialCookbookDatabaseAndTables.Designer.cs" />
+    <Compile Remove="Migrations\20190415104350_InitialCookbookDatabaseAndTables.cs" />
+    <Compile Remove="Migrations\20190415104350_InitialCookbookDatabaseAndTables.Designer.cs" />
+    <Compile Remove="Migrations\20190416193034_CookbookDatabaseAndTablesCreation.cs" />
+    <Compile Remove="Migrations\20190416193034_CookbookDatabaseAndTablesCreation.Designer.cs" />
+    <Compile Remove="Migrations\20190417043224_CreateDatabaseAndTablesForCookbook.cs" />
+    <Compile Remove="Migrations\20190417043224_CreateDatabaseAndTablesForCookbook.Designer.cs" />
+    <Compile Remove="Migrations\20190417044929_CreateDatabaseAndTablesForCookbook.cs" />
+    <Compile Remove="Migrations\20190417044929_CreateDatabaseAndTablesForCookbook.Designer.cs" />
+    <Compile Remove="Migrations\20190417172649_AddPreparedRecipeIngredients.cs" />
+    <Compile Remove="Migrations\20190417172649_AddPreparedRecipeIngredients.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cookbook.WebApi.BusinessLayer\Cookbook.WebApi.BusinessLayer.csproj" />
+  </ItemGroup>
+
+</Project>

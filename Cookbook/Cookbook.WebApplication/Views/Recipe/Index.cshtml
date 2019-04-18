@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Recipes Page";
+}
+
+<div class="container" id="cookbook-container">
+    <div id="top-left-panel" class="col-sm-9">
+        <div id="top-left-panel-header"></div>
+        <div id="top-left-panel-body"></div>
+    </div>
+    <div id="top-right-panel" class="col-sm-3">
+        <div id="top-right-panel-header"></div>
+        <div id="top-right-panel-body"></div>
+    </div>
+    <div id="bottom-panel" class="col-sm-12">
+        <div id="bottom-actions"></div>
+    </div>
+</div>
+
+<script id="top-left-panel-header-template" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="panel-header-title">{{firstName}}'s recipes: </div>
+    </div>
+</script>
+
+<script id="recipes-container-template" type="text/x-handlebars-template">
+    @*<div class="row">
+            <ul id="recipes-list"></ul>
+        </div>*@
+
+    <div id="recipes-list">
+    </div>
+</script>
+
+<script id="recipes-item-template" type="text/x-handlebars-template">
+    @*<li class="recipe-item">{{name}}</li>*@
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#recipe-{{recipeId}}" aria-expanded="true" aria-controls="collapseOne">
+                    {{name}}
+                </button>
+                {{#if haveInProgressPreparation}}
+                    <a class="btn btn-warning float-right" href="/recipe/prepare?recipeId={{recipeId}}&prepareRecipeId={{inProgressRecipeId}}">Continue Preparing</a>
+                {{/if}}
+                {{#if noInProgressPreparation}}
+                    <a class="btn btn-primary float-right" href="/recipe/prepare?recipeId={{recipeId}}">Prepare</a>
+                {{/if}}
+            </h5>
+        </div>
+
+        <div id="recipe-{{recipeId}}" class="collapse" aria-labelledby="headingOne" data-parent="#recipes-list">
+            <div class="card-body">
+                <h4>Ingredients</h4>
+                <table class="table table-hover" id="ingredients-recipe-{{recipeId}}">
+                </table>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="ingredients-item-template" type="text/x-handlebars-template">
+    <tr><td>{{name}}</td></tr>
+</script>
+
+<script id="recipe-actions-template" type="text/x-handlebars-template">
+    <div class="list-group">
+        {{#if add}}
+        <a href="/recipe/create" class="list-group-item list-group-item-action">
+            Add Recipe
+        </a>
+        {{/if}}
+        {{#if ingredients}}
+        <a href="/ingredient" class="list-group-item list-group-item-action">
+            View available ingredients
+        </a>
+        {{/if}}
+        {{#if back}}
+        <a href="/recipe" class="list-group-item list-group-item-action">Back</a>
+        {{/if}}
+    </div>
+</script>
+
+<script src="~/js/recipes.js" asp-append-version="true"></script>

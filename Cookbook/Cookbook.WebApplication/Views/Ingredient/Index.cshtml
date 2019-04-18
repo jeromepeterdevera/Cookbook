@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container" id="cookbook-container">
+    <div id="top-left-panel" class="col-sm-8">
+        <div id="top-left-panel-header"></div>
+        <div id="top-left-panel-body"></div>
+    </div>
+    <div id="top-right-panel" class="col-sm-4">
+        <div id="top-right-panel-header"></div>
+        <div id="top-right-panel-body"></div>
+    </div>
+    <div id="bottom-panel" class="col-sm-12">
+        <div id="bottom-actions"></div>
+    </div>
+</div>
+
+<div id="add-ingredient-name-template">
+    <input class="form-control ingredient-name col-sm-9 ingredient-name" type="text"> <button class="btn btn-primary col-sm-2 float-right add-more-ingredient">+</button>
+</div>
+
+
+<script id="ingredients-list-panel-template" type="text/x-handlebars-template">
+    <h5 class="card-title">Available Ingredients</h5>
+    <div class="list-group" id="ingredients-list-panel">
+    </div>
+</script>
+
+<script id="ingredients-item-template" type="text/x-handlebars-template">
+    <button type="button" class="list-group-item list-group-item-action" data-ingredient-id="{{ingredientId}}">{{name}}</button>
+</script>
+
+<script id="recipe-actions-template" type="text/x-handlebars-template">
+    <div class="list-group">
+        {{#if ingredients}}
+        <a href="/ingredient" class="list-group-item list-group-item-action">
+            View available ingredients
+        </a>
+        {{/if}}
+        {{#if back}}
+        <a href="/recipe" class="list-group-item list-group-item-action">Go back to Recipes</a>
+        {{/if}}
+        {{#if add}}
+        <a href="#" class="list-group-item list-group-item-action" id="add-ingredient-link">
+            Add Ingredient
+        </a>
+        {{/if}}
+    </div>
+</script>
+
+<script id="add-ingredient-template" type="text/x-handlebars-template">
+    <div id="ingredient-add-form">
+        <br />
+        <hr />
+        <br />
+        <div class="card">
+            <div class="card-header">
+                Add Ingredient
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group ingredient-main-container">
+                        <label for="ingredient-name">Ingredient Name</label>
+                        <div class="ingredients-container">
+                            <input class="form-control ingredient-name col-sm-9 ingredient-name" type="text"> <button class="btn btn-primary col-sm-2 float-right add-more-ingredient">+</button>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <button type="button" class="btn btn-light" id="cancelIngredient">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="addIngredient">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="~/js/ingredient.js" asp-append-version="true"></script>
