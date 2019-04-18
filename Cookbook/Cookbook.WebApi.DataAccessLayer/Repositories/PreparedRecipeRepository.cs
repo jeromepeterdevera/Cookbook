@@ -486,6 +486,7 @@ namespace Cookbook.WebApi.DataAccessLayer.Repositories
                     Name = pri.Ingredient.Name
                 });
 
+            retrievedPreparedRecipe.Alias = preparedRecipeToFinish.Alias;
             retrievedPreparedRecipe.Complete = true;
             this.cookbookDbContext.preparedRecipes.Update(retrievedPreparedRecipe);
             return new PreparedRecipe
