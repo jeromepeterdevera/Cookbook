@@ -23,17 +23,11 @@
 </script>
 
 <script id="recipes-container-template" type="text/x-handlebars-template">
-    @*<div class="row">
-            <ul id="recipes-list"></ul>
-        </div>*@
-
     <div id="recipes-list">
     </div>
 </script>
 
 <script id="recipes-item-template" type="text/x-handlebars-template">
-    @*<li class="recipe-item">{{name}}</li>*@
-
     <div class="card">
         <div class="card-header" id="headingOne">
             <h5 class="mb-0">
@@ -41,19 +35,24 @@
                     {{name}}
                 </button>
                 {{#if haveInProgressPreparation}}
-                    <a class="btn btn-warning float-right" href="/recipe/prepare?recipeId={{recipeId}}&prepareRecipeId={{inProgressRecipeId}}">Continue Preparing</a>
+                <a class="btn btn-warning float-right" href="/recipe/prepare?recipeId={{recipeId}}&prepareRecipeId={{inProgressRecipeId}}">Continue Preparing</a>
                 {{/if}}
                 {{#if noInProgressPreparation}}
-                    <a class="btn btn-primary float-right" href="/recipe/prepare?recipeId={{recipeId}}">Prepare</a>
+                <a class="btn btn-primary float-right" href="/recipe/prepare?recipeId={{recipeId}}">Prepare</a>
                 {{/if}}
             </h5>
         </div>
 
         <div id="recipe-{{recipeId}}" class="collapse" aria-labelledby="headingOne" data-parent="#recipes-list">
             <div class="card-body">
-                <h4>Ingredients</h4>
-                <table class="table table-hover" id="ingredients-recipe-{{recipeId}}">
-                </table>
+                <h4 class="mb-0">
+                    Ingredients
+                    {{#if havePreparedRecipes}}
+                    <a class="btn btn-secondary float-right" href="/preparedrecipe?recipeId={{recipeId}}&recipeName={{name}}">View Prepared Recipes</a>
+                    {{/if}}
+                </h4>
+                <br />
+                <table class="table table-hover" id="ingredients-recipe-{{recipeId}}"></table>
             </div>
         </div>
     </div>

@@ -54,5 +54,7 @@ namespace Cookbook.WebApi.BusinessLayer.Interactors
         PreparedRecipe FinishRecipePreparation(int id, int recipeId, PreparedRecipe preparedRecipeToComplete);
 
         PreparedRecipe GetInProgressPreparedRecipe(int cookId, int recipeId);
+
+        IEnumerable<PreparedRecipe> GetPreparedRecipesByCookAndRecipeId(string email, int recipeId);
     }
 }

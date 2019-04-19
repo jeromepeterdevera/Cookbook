@@ -3,12 +3,24 @@
 
 // Write your JavaScript code.
 
-const cooksUri = "https://localhost:44395/api/Cooks";
-const ingredientsUri = "https://localhost:44395/api/Ingredients";
+const cooksURI = "https://localhost:44395/api/Cooks";
+const ingredientsURI = "https://localhost:44395/api/Ingredients";
 let todos = null;
 let chef = null;
 let recipes = null;
 
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
 
 function getUserEmail() {
     return $('#UserEmail').val().trim();
@@ -17,7 +29,7 @@ function getUserEmail() {
 function getCookId() {
     return $.ajax({
         type: "GET",
-        url: cooksUri.concat('/', getUserEmail())
+        url: cooksURI.concat('/', getUserEmail())
     });
 }
 
@@ -42,7 +54,7 @@ function getCookData() {
 
     $.ajax({
         type: "GET",
-        url: cooksUri.concat('/', getUserEmail()),
+        url: cooksURI.concat('/', getUserEmail()),
         success: function (data) {
         
             $('#top-left-panel-header').append($cookNameTemplate(data));
@@ -55,6 +67,10 @@ function getCookData() {
                     recipe['inProgressRecipeId'] = inProgressRecipe.preparedRecipeId;
                 } else {
                     recipe['noInProgressPreparation'] = "true";
+                }
+
+                if (recipe.preparedRecipes.length > 0) {
+                    recipe['havePreparedRecipes'] = "true";
                 }
 
                 let $recipe = $recipeItemTemplate(recipe);
@@ -70,10 +86,46 @@ function getCookData() {
     });
 }
 
+
+function getPreparedRecipes(email, recipeId, recipeName) {
+    let $containerSource = $("#recipes-container-template").html();
+    let $containerTemplate = Handlebars.compile($containerSource);
+    $('#top-left-panel-body').append($containerTemplate);
+
+    let $recipesList = $('#recipes-list');
+    let $recipeItem = $("#recipes-item-template").html();
+    let $recipeItemTemplate = Handlebars.compile($recipeItem);
+
+    let $recipeName = $("#top-left-panel-header-template").html();
+    let $recipeNameTemplate = Handlebars.compile($recipeName);
+
+    let $ingredient = $("#ingredients-item-template").html();
+    let $ingredientTemplate = Handlebars.compile($ingredient);
+
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:44395/api/Cooks/"+email+"/Recipes/"+recipeId+"/PreparedRecipes",
+        success: function (data) {
+            $('#top-left-panel-header').append($recipeNameTemplate({ recipeName: recipeName }));
+
+            $.each(data, function (index, preparedRecipe) {
+                let $preparedRecipe = $recipeItemTemplate(preparedRecipe);
+                $recipesList.append($preparedRecipe);
+
+                $.each(preparedRecipe.ingredients, function (index, ingredient) {
+                    let $ingredient = $ingredientTemplate(ingredient);
+
+                    $($ingredient).appendTo("#ingredients-recipe-" + preparedRecipe.preparedRecipeId);
+                });
+            });
+        }
+    });
+}
+
 function getCook(email) {
     $.ajax({
         type: "GET",
-        url: cooksUri.concat('/', email),
+        url: cooksURI.concat('/', email),
         success: function (data) {
             console.log(data);
         }
@@ -90,7 +142,7 @@ function addCook() {
     $.ajax({
         type: "POST",
         accepts: "application/json",
-        url: cooksUri,
+        url: cooksURI,
         contentType: "application/json",
         data: JSON.stringify(cook),
         error: function (jqXHR, textStatus, errorThrown) {
@@ -136,7 +188,7 @@ function displayAvailableIngredients(location) {
 
     $.ajax({
         type: "GET",
-        url: ingredientsUri,
+        url: ingredientsURI,
         success: function (data) {
             $.each(data, function (i, ingredient) {
                 let $ingredientItemContainer = $ingredientItemTemplate(ingredient);
@@ -175,13 +227,13 @@ function displayRecipeIngredients(location, recipeId, cookId) {
 }
 
 function displayPreparedIngredients(cookId, recipeId, prepareRecipeId) {
-    let getPrepairedIngredientsURI = "https://localhost:44395/api/Cooks/" + cookId + "/Recipes/" + recipeId + "/PreparedRecipes/" + prepareRecipeId;
+    let getpreparedIngredientsURI = "https://localhost:44395/api/Cooks/" + cookId + "/Recipes/" + recipeId + "/PreparedRecipes/" + prepareRecipeId;
     let $preparedIngredientItem = $("#ingredients-item-template").html();
     let $preparedIngredientItemTemplate = Handlebars.compile($preparedIngredientItem);
 
     $.ajax({
         type: "GET",
-        url: getPrepairedIngredientsURI,
+        url: getpreparedIngredientsURI,
         success: function (data) {
             if (data.ingredients && data.ingredients.length > 0) {
                 $('#ingredient-reminder').text('');
@@ -208,4 +260,18 @@ function displayAddIngredientForm() {
     let $addIngredientForm = $addIngredientTemplate();
 
     $('#top-right-panel-body').append($addIngredientForm);
+}
+
+function displayErrorMessage(message) {
+    let $error = $("#error-template").html();
+    let $errorTemplate = Handlebars.compile($error);
+    let $errorMessage = $errorTemplate();
+
+    $('#top-left-panel-header').append($errorMessage);
+
+    if (message) {
+        $('.error-message').html(message);
+    }
+
+    setTimeout(function () { $('.error-message-container').hide('fade'); }, 3500);
 }

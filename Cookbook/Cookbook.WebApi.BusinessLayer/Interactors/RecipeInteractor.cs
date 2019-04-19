@@ -112,6 +112,12 @@ namespace Cookbook.WebApi.BusinessLayer.Interactors
                 return this.unitOfWork.preparedRecipeRepository.GetPreparedRecipe(cookId, recipeId, preparedRecipeId);
         }
 
+        public IEnumerable<PreparedRecipe> GetPreparedRecipesByCookAndRecipeId(string email, int recipeId)
+        {
+            using (this.unitOfWork)
+                return this.unitOfWork.preparedRecipeRepository.GetPreparedRecipes(email, recipeId);
+        }
+
         public IEnumerable<PreparedRecipe> GetPreparedRecipesByCookIdAndRecipeId(int recipeId)
         {
             using (this.unitOfWork)

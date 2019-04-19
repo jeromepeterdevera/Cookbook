@@ -34,16 +34,18 @@ namespace Cookbook.WebApi.DataAccessLayer.Repositories
                     foreach (var recipe in cook.Recipes)
                     {
                         var ingredients = this.cookbookDbContext.recipeIngredients.Where(ri => ri.RecipeId == recipe.RecipeId)
-                            .Select(ri => new Ingredient {
+                            .Select(ri => new Ingredient
+                            {
                                 IngredientId = ri.IngredientId,
                                 Name = ri.Ingredient.Name
                             });
 
                         var preparedRecipes = this.cookbookDbContext.preparedRecipes.Where(pr => pr.RecipeId == recipe.RecipeId)
-                            .Select(pr => new PreparedRecipe {
-                                Alias = pr.Alias,
+                            .Select(pr => new PreparedRecipe
+                            {
+                                Alias = string.IsNullOrEmpty(pr.Alias) ? "Empty Recipe Alias" : pr.Alias,
                                 Complete = pr.Complete,
-                                PreparedWhen = pr.PreparedWhen,
+                                PreparedWhen = pr.PreparedWhen.ToString("MMMM dd, yyyy hh:mm tt"),
                                 PreparedRecipeId = pr.PreparedRecipeId
                             });
 
@@ -86,17 +88,18 @@ namespace Cookbook.WebApi.DataAccessLayer.Repositories
                 foreach (var recipe in cook.Recipes)
                 {
                     var ingredients = this.cookbookDbContext.recipeIngredients.Where(ri => ri.RecipeId == recipe.RecipeId)
-                        .Select(ri => new Ingredient {
-                            IngredientId=ri.IngredientId,
+                        .Select(ri => new Ingredient
+                        {
+                            IngredientId = ri.IngredientId,
                             Name = ri.Ingredient.Name
                         });
 
                     var preparedRecipes = this.cookbookDbContext.preparedRecipes.Where(pr => pr.RecipeId == recipe.RecipeId)
                         .Select(pr => new PreparedRecipe
                         {
-                            Alias = pr.Alias,
+                            Alias = string.IsNullOrEmpty(pr.Alias) ? "Empty Recipe Alias" : pr.Alias,
                             Complete = pr.Complete,
-                            PreparedWhen = pr.PreparedWhen,
+                            PreparedWhen = pr.PreparedWhen.ToString("MMMM dd, yyyy hh:mm tt"),
                             PreparedRecipeId = pr.PreparedRecipeId
                         });
 
@@ -145,9 +148,9 @@ namespace Cookbook.WebApi.DataAccessLayer.Repositories
                     var preparedRecipes = this.cookbookDbContext.preparedRecipes.Where(pr => pr.RecipeId == recipe.RecipeId)
                         .Select(pr => new PreparedRecipe
                         {
-                            Alias = pr.Alias,
+                            Alias = string.IsNullOrEmpty(pr.Alias) ? "Empty Recipe Alias" : pr.Alias,
                             Complete = pr.Complete,
-                            PreparedWhen = pr.PreparedWhen,
+                            PreparedWhen = pr.PreparedWhen.ToString("MMMM dd, yyyy hh:mm tt"),
                             PreparedRecipeId = pr.PreparedRecipeId
                         });
 

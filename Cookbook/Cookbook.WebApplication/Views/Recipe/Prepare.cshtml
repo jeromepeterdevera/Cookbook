@@ -51,6 +51,15 @@
     <button type="button" class="list-group-item list-group-item-action" data-ingredient-id="{{ingredientId}}" id="ingredient-{{ingredientId}}">{{name}}</button>
 </script>
 
+<script id="error-template" type="text/x-handlebars-template">
+    <div class="error-message-container">
+        <div class="alert alert-danger error-message" role="alert">
+            Something went wrong. Please try again.
+        </div>
+    </div>
+</script>
+
+
 <script src="~/js/prepare.js" asp-append-version="true"></script>
 
 

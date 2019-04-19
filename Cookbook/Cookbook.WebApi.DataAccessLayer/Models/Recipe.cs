@@ -24,6 +24,7 @@ namespace Cookbook.WebApi.DataAccessLayer.Models
         [StringLength(250)]
         public string Description { get; set; }
 
+
         public IEnumerable<RecipeIngredient> RecipeIngredients { get; set; }
 
         public IEnumerable<PreparedRecipe> PreparedRecipes { get; set; }

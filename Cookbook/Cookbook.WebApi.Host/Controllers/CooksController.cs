@@ -351,6 +351,27 @@ namespace Cookbook.WebApi.Host.Controllers
             return result;
         }
 
+        [HttpGet("{email:regex(^[[\\w-\\.]]+@([[\\w-]]+\\.)+[[\\w-]]{{2,4}}$)}/recipes/{recipeId:int}/preparedrecipes")]
+        public ActionResult<IEnumerable<PreparedRecipe>> Get(string email, int recipeId)
+        {
+            ActionResult result;
+            try
+            {
+                IEnumerable<PreparedRecipe> preparedRecipe = this.recipeInteractor.GetPreparedRecipesByCookAndRecipeId(email, recipeId);
+                result = Ok(preparedRecipe);
+            }
+            catch (RecordNotFoundException)
+            {
+                result = NotFound();
+            }
+            catch (Exception)
+            {
+                result = StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return result;
+        }
+
         [HttpGet("{id:int}/recipes/{recipeId:int}/preparedrecipes")]
         public ActionResult<IEnumerable<PreparedRecipe>> Get(int id, int recipeId)
         {
@@ -406,9 +427,9 @@ namespace Cookbook.WebApi.Host.Controllers
                     result = Ok(preparedRecipe);
                 }
             }
-            catch (RecordNotFoundException)
+            catch (RecordNotFoundException ex)
             {
-                result = NotFound();
+                result = NotFound(ex.Message);
             }
             catch (Exception)
             {

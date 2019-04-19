@@ -14,7 +14,7 @@ namespace Cookbook.WebApi.BusinessLayer.Models
 
         public bool Complete { get; set; }
 
-        public DateTime PreparedWhen { get; set; }
+        public string PreparedWhen { get; set; }
 
         public IEnumerable<Ingredient> Ingredients { get; set; }
     }

@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Prepared Recipes Page";
+}
+
+<div class="container" id="cookbook-container">
+    <div id="top-left-panel" class="col-sm-9">
+        <div id="top-left-panel-header"></div>
+        <div id="top-left-panel-body"></div>
+    </div>
+    <div id="top-right-panel" class="col-sm-3">
+        <div id="top-right-panel-header"></div>
+        <div id="top-right-panel-body"></div>
+    </div>
+    <div id="bottom-panel" class="col-sm-12">
+        <div id="bottom-actions"></div>
+    </div>
+</div>
+
+<script id="top-left-panel-header-template" type="text/x-handlebars-template">
+    <div class="row">
+        <div class="panel-header-title">{{recipeName}}</div>
+    </div>
+</script>
+
+<script id="recipes-container-template" type="text/x-handlebars-template">
+    <div id="recipes-list">
+    </div>
+</script>
+
+<script id="recipes-item-template" type="text/x-handlebars-template">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#recipe-{{preparedRecipeId}}" aria-expanded="true" aria-controls="collapseOne">
+                    {{alias}}
+                </button>
+                <span class="badge badge-light float-right prepared-when">Prepared on {{preparedWhen}}</span>
+            </h5>
+        </div>
+
+        <div id="recipe-{{preparedRecipeId}}" class="collapse" aria-labelledby="headingOne" data-parent="#recipes-list">
+            <div class="card-body">
+                <h4 class="mb-0">
+                    Ingredients
+                </h4>
+                <br />
+                <table class="table table-hover" id="ingredients-recipe-{{preparedRecipeId}}"></table>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="ingredients-item-template" type="text/x-handlebars-template">
+    <tr><td>{{name}}</td></tr>
+</script>
+
+<script id="recipe-actions-template" type="text/x-handlebars-template">
+    <div class="list-group">
+        {{#if back}}
+        <a href="/recipe" class="list-group-item list-group-item-action">Back</a>
+        {{/if}}
+    </div>
+</script>
+
+<script src="~/js/preparedrecipes.js" asp-append-version="true"></script>

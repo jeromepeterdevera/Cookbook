@@ -31,6 +31,7 @@
 
     $("#cookbook-container").on('click', '#addRecipe', function (ev) {
         let ingredientIds = _.map($("#selected-ingredient-list .list-group-item"), function (obj) { return { ingredientId: $(obj).data("ingredient-id"), name: $(obj).text().trim() }; });
+        ingredientIds = (ingredientIds.length > 0) ? ingredientIds : null;
         let payload = {
             name: $("#recipe-name").val().trim(),
             description: $("#recipe-description").val().trim(),
@@ -47,7 +48,9 @@
                 window.location = "/recipe";
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
+                let errors = _.map(jqXHR.responseJSON.errors, function (val) { return "<p class'error-msg'> * "+val.join(", ")+"</p>"; });
+                let errorMessage = "<p class='error-msg-title'>Following errors occured:</p>"+errors.join("");
+                displayErrorMessage(errorMessage);
             }
         });
     });

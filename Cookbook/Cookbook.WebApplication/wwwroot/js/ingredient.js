@@ -37,7 +37,9 @@
                 window.location = "/ingredient";
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
+                let errors = _.map(jqXHR.responseJSON.errors, function (val) { return "<p class'error-msg'> * " + val.join(", ") + "</p>"; });
+                let errorMessage = "<p class='error-msg-title'>Following errors occured:</p>" + errors.join("");
+                displayErrorMessage(errorMessage);
             }
         });
     });

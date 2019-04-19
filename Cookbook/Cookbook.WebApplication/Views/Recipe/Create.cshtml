@@ -28,18 +28,18 @@
             <textarea class="form-control" id="recipe-description" rows="3" maxlength="250"></textarea>
         </div>
         <div class="card">
-            
+
             <div class="card-body">
                 <h5 class="card-title">Ingredients</h5>
                 <div id="ingredients-list">
                     <span id="ingredient-reminder">Select from the available ingredients.</span>
                     <div class="list-group" id="selected-ingredient-list">
-                 
+
                     </div>
                 </div>
             </div>
         </div>
-        <br/>
+        <br />
         <button type="button" class="btn btn-light" id="backRecipe">Cancel</button>
         <button type="button" class="btn btn-primary" id="addRecipe">Save</button>
     </form>
@@ -56,6 +56,13 @@
     <button type="button" class="list-group-item list-group-item-action" data-ingredient-id="{{ingredientId}}">{{name}}</button>
 </script>
 
+<script id="error-template" type="text/x-handlebars-template">
+    <div class="error-message-container">
+        <div class="alert alert-danger error-message" role="alert">
+            Something went wrong. Please try again.
+        </div>
+    </div>
+</script>
 <script src="~/js/recipe.js" asp-append-version="true"></script>
 
 

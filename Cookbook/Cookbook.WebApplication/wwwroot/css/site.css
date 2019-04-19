@@ -101,3 +101,18 @@ body {
 .ingredient-name {
     margin-bottom: 5px;
 }
+
+.prepared-when {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #585757;
+}
+
+.error-msg {
+    font-size: 12px;
+}
+
+.error-msg-title {
+    font-size: 14px;
+    font-weight: bold;
+}
