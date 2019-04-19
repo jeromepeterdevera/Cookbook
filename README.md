@@ -5,18 +5,16 @@
 # Setup
 The application uses two databases, Cookbook and CookbookAuthentication.
 
-To setup Cookbook database.
-* execute the update-database command from the package manager console with Cookbook.WebApi.DataAccessLayer as default project and Cookbook.WebApi.Host as the selected startup project.
+To setup the databases to the following.
+* Open the Cookbook.sln in Visual Studio, go to Package Manager Console set Cookbook.WebApi.DataAccessLayer as the Default Project and Cookbook.WebApi.Host as the startup project then run update-database from the Package Manager Console.
+* then, change the default project in Package Manager Console and the StartUp Project to Cookbook.WebApplication and run update-database again.
 * execute the Cookbook.sql file from the Data Seeding folder.
-
-To setup CookbookAuthentication database.
-* execute the update-database command from the package manager console with Cookbook.WebApplication as default project and selected startup project.
 * execute the CookbookAuthentication.sql file from the Data Seeding folder.
 
 # Testing the application
-To test the application, we need to run both Cookbook.WebApi.Host or Cookbook.WebApplication project.
+To test the application, we need to run both Cookbook.WebApi.Host and Cookbook.WebApplication project.
 
-One way to do it is by running either or both of them without the debugger.
+One way to do that is by running either or both of them without the debugger attached.
 * Start Without Debugging Cookbook.WebApi.Host (Set Cookbook.WebApi.Host as startup project then press ctrl+F5)
 * Start Without Debugging Cookbook.WebApplication (Set Cookbook.WebApplication as startup project then press ctrl+F5)
 
