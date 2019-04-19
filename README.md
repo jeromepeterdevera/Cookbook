@@ -6,7 +6,7 @@
 The application uses two databases, Cookbook and CookbookAuthentication.
 
 To setup Cookbook database.
-* execute the update-database command from the package manager console with Cookbook.WebApi.DataAccessLayer as default project and Cookbook.Application as the selected startup project.
+* execute the update-database command from the package manager console with Cookbook.WebApi.DataAccessLayer as default project and Cookbook.WebApi.Host as the selected startup project.
 * execute the Cookbook.sql file from the Data Seeding folder.
 
 To setup CookbookAuthentication database.
